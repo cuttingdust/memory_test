@@ -1,29 +1,39 @@
 ﻿#include <iostream>
-#include <thread>
 
-void ThreadMain()
-{
-    std::cout << "begin sub thread main " << std::this_thread::get_id() << std::endl;
-    for (int i = 0; i < 10; i++)
-    {
-        std::cout << "in thread " << i << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1)); /// 1000ms
-    }
-    std::cout << "end sub thread main " << std::this_thread::get_id() << std::endl;
-}
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     {
-        std::cout << "main thread ID " << std::this_thread::get_id() << std::endl;
-        /// 线程创建启动
-        std::thread th(ThreadMain);
-        std::cout << "begin wait sub thread  " << std::endl;
-        /// 阻塞等待子线程退出
-        th.join();
-        std::cout << "end wait sub thread  " << std::endl;
+        std::cout << "101 pointer" << std::endl;
+        /// 指针类型 p1变量存在栈中
+        /// new int 堆中
+        int* p1 = new int;
+        ///  *间接符号
+        *p1   = 101;
+        int i = 10;
+        std::cout << "i = " << i << std::endl;
+        int* p2 = &i;
+        *p2     = 102;
+        std::cout << "i = " << i << std::endl;
+        std::cout << "p1 = " << p1 << std::endl;
+        std::cout << "*p1 = " << *p1 << std::endl;
+        std::cout << "sizeof(p1) = " << sizeof(p1) << std::endl;
+        std::cout << "sizeof(*p1) = " << sizeof(*p1) << std::endl;
+        delete p1;
+        std::cout << "after delete p1 = " << p1 << std::endl; /// 此时地址 也是野的
+        if (p1)
+        {
+            std::cout << "p1 not empty?" << std::endl;
+        }
+        p1 = nullptr; /// nullptr c++11 NULL 0
+        delete p1;    /// null delete 安全
+        if (!p1)
+        {
+            std::cout << "p1 is empty!" << std::endl;
+        }
+        delete p1; /// 多次 delete null安全
     }
 
-
+    getchar();
     return 0;
 }
