@@ -50,6 +50,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(CommonTools)
 
 add_subdirectory(memory_one)
+add_subdirectory(memory_alloc_area)
 
 
 # 拷贝assert目录到输出目录

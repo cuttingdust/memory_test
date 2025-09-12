@@ -9,8 +9,9 @@ int main(int argc, char* argv[])
         /// new int 堆中
         int* p1 = new int;
         ///  *间接符号
-        *p1   = 101;
-        int i = 10;
+        *p1            = 101;
+        int        i   = 10;
+        int& ref = i; /// 创建对 x 的 const 引用
         std::cout << "i = " << i << std::endl;
         int* p2 = &i;
         *p2     = 102;
@@ -19,6 +20,7 @@ int main(int argc, char* argv[])
         std::cout << "*p1 = " << *p1 << std::endl;
         std::cout << "sizeof(p1) = " << sizeof(p1) << std::endl;
         std::cout << "sizeof(*p1) = " << sizeof(*p1) << std::endl;
+        std::cout << "sizeof(int&) = " << sizeof(ref) << std::endl;
         delete p1;
         std::cout << "after delete p1 = " << p1 << std::endl; /// 此时地址 也是野的
         if (p1)
