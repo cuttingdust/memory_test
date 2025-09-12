@@ -1,19 +1,18 @@
 ﻿#include <iostream>
 
-/// 保留区             0地址开始C 库    
+/// 保留区             0地址开始C 库
 /// 代码区             .text 函数代码                                  高地址
 /// 常量区             .rodata 字符串
 /// 全局(静态)变量区   .data 非0区和.bass 未初始化（全局 静态）
 /// 堆区                                                                 ↑
 /// 栈区                                                                 ↓
-/// 命令行参数空间 
+/// 命令行参数空间
 /// 内核（windows2G/linux1G）                                          低地址
 
 /// 整体 上面的就像倒着的杯子 看待  整体开始内存不连续
 
 /// 堆 向下增长 (低地址 向 高地址) 倒是连续的 但是 和 内存对齐的策略有点关系
 /// 栈 向上增长 (高地址 向低地址)
-
 
 
 constexpr int g0 = 4;
@@ -58,6 +57,10 @@ int           main(int argc, char* argv[])
         delete p2;
         delete p3;
         delete p4;
+        p1 = nullptr;
+        p2 = nullptr;
+        p3 = nullptr;
+        p4 = nullptr;
 
         int i1 = 100;
         int i2 = 101;
