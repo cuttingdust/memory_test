@@ -52,6 +52,52 @@ int main(int argc, char* argv[])
         }
     }
     {
+        /// 堆中二维数组的两种方式
+        /// 连续空间
+        int size      = 2;
+        int(*arr5)[3] = new int[size][3]{ { 1, 1, 2 }, { 3, 2, 3 } };
+        for (int i = 0; i < size; i++)
+        {
+            //sizeof(arr5[i]) 12 ;
+            for (auto a : arr5[i])
+            {
+                std::cout << a << "=";
+            }
+            std::cout << std::endl;
+        }
+
+        delete[] arr5;
+        arr5 = nullptr;
+
+        int width  = 4;
+        int height = 3;
+        /// 指针数组
+        /*
+        1 2 3 1
+        4 5 6 3
+        1 1 1 1
+        */
+        int** arr6 = new int* [height] { 0 };
+        for (int i = 0; i < height; i++)
+        {
+            arr6[i] = new int[width]{ 0 };
+        }
+        arr6[1][1] = 99;
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                std::cout << arr6[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
+         for (int i = 0; i < height; i++)
+            delete arr6[i];
+        delete[] arr6;
+        arr6 = nullptr;
+    }
+    {
         /// 栈空间 未初始化数组 空间内部不定
         int arr1[10];                  //
         memset(arr1, 0, sizeof(arr1)); /// 数组可以通过sizeof获取内存大小
