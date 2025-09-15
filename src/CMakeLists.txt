@@ -52,6 +52,7 @@ include(CommonTools)
 add_subdirectory(memory_one)
 add_subdirectory(memory_alloc_area)
 add_subdirectory(memory_array)
+add_subdirectory(memory_array_2D)
 
 
 # 拷贝assert目录到输出目录
