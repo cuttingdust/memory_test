@@ -28,6 +28,13 @@ if(OpenMP_FOUND)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
+# OpenCV
+find_package(OpenCV CONFIG REQUIRED)
+message("OpenCV_FOUND = ${OpenCV_FOUND}")
+message("OpenCV_VERSION = ${OpenCV_VERSION}")
+message("OpenCV_LIBS = ${OpenCV_LIBS}")
+
+
 # 外部依赖项
 set(DPS_INCLUDES)
 set(DPS_TARGETS)
@@ -55,8 +62,9 @@ add_subdirectory(memory_array)
 add_subdirectory(memory_array_2D)
 add_subdirectory(memory_void_cast)
 add_subdirectory(memory_const_point)
+add_subdirectory(memory_array_opencv)
 
 
 # 拷贝assert目录到输出目录
-# set(ASSERT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assert)
-# file(COPY ${ASSERT_PATH} DESTINATION ${OUT_RUN_PATH})
+set(ASSERT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assert)
+file(COPY ${ASSERT_PATH} DESTINATION ${OUT_RUN_PATH})
