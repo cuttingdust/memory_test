@@ -65,6 +65,7 @@ add_subdirectory(memory_const_point)
 add_subdirectory(memory_array_opencv)
 add_subdirectory(memory_unique_ptr)
 add_subdirectory(memory_share_ptr)
+add_subdirectory(memory_weak_ptr)
 
 
 # 拷贝assert目录到输出目录
