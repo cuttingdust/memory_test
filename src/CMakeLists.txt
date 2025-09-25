@@ -67,6 +67,7 @@ add_subdirectory(memory_unique_ptr)
 add_subdirectory(memory_share_ptr)
 add_subdirectory(memory_weak_ptr)
 add_subdirectory(memory_function_arg_ptr)
+add_subdirectory(memory_string)
 
 
 # 拷贝assert目录到输出目录
