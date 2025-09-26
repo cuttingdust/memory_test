@@ -69,6 +69,8 @@ add_subdirectory(memory_weak_ptr)
 add_subdirectory(memory_function_arg_ptr)
 add_subdirectory(memory_string)
 add_subdirectory(memory_vector)
+add_subdirectory(memory_new_delete)
+
 
 
 # 拷贝assert目录到输出目录
