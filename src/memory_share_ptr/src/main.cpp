@@ -125,7 +125,15 @@ int main(int argc, char* argv[])
             std::cout << "sc3 use_count=" << sc3.use_count() << std::endl;
         }
 
-         std::cout << "======3======" << std::endl;
+        {
+            auto p4  = new XData;
+            auto sc4 = std::shared_ptr<XData>(p4);
+            std::cout << "p4 = " << p4 << std::endl;
+            std::cout << "sc4 = " << sc4 << std::endl;
+            std::cout << "sc4.get() = " << sc4.get() << std::endl; /// 同  std::unique_ptr 一样 打印的是.get()的地址
+        }
+
+        std::cout << "======3======" << std::endl;
     }
     std::cout << "after }" << std::endl;
     std::cout << "======2======" << std::endl;
