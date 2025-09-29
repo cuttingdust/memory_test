@@ -70,6 +70,7 @@ add_subdirectory(memory_function_arg_ptr)
 add_subdirectory(memory_string)
 add_subdirectory(memory_vector)
 add_subdirectory(memory_new_delete)
+add_subdirectory(memory_allocate)
 
 
 
