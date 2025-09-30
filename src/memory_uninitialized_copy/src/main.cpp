@@ -108,15 +108,18 @@ int main(int argc, char* argv[])
         auto data = static_cast<XData*>(std::malloc(sizeof(XData) * size)); /// 未初始化内存
         std::cout << "data: " << data << std::endl;
         std::ranges::uninitialized_default_construct_n(data, size);
+        std::uninitialized_default_construct_n(data, size); /// range 和 非 range 一样
+        std::uninitialized_default_construct(data, data + size);
         for (int i = 0; i < size; i++)
         {
             /// c++20 调用构造函数
             if (data)
-                std::ranges::construct_at(&data[i]); /// 直接调用构造对象 在这块内存上面 
+                std::ranges::construct_at(&data[i]); /// 直接调用构造对象 在这块内存上面
 
             std::ranges::destroy_at(&data[i]); /// 析构对象
         }
         /// c++ 17 调用析构
+        std::ranges::destroy(data, data + size);
         std::ranges::destroy_n(data, size); /// 析构所有的
         std::free(data);
         std::cout << "===========================================" << std::endl;

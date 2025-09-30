@@ -71,6 +71,7 @@ add_subdirectory(memory_string)
 add_subdirectory(memory_vector)
 add_subdirectory(memory_new_delete)
 add_subdirectory(memory_allocate)
+add_subdirectory(memory_uninitialized_copy)
 
 
 
