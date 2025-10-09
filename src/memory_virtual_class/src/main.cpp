@@ -36,6 +36,60 @@ public:
     int a2 = 6;
 };
 
+//////////////////////////////////////////////////////////////////
+
+/// 多继承二义性问题
+class C
+{
+public:
+    int c1;
+};
+
+class B1 : public C
+{
+public:
+    int b1;
+};
+
+class B2 : public C
+{
+public:
+    int b2;
+};
+/*
+C  C
+B1 B2
+  A3
+*/
+class A3 : public B1, public B2
+{
+public:
+    int a1 = 0;
+};
+
+
+//////////////////////////////////////////////////////////////////
+class B3 : virtual public C
+{
+public:
+    int b1;
+};
+class B4 : virtual public C
+{
+public:
+    int b2;
+};
+
+/*
+  C
+B1 B2
+  A4
+*/
+class A4 : public B3, public B4
+{
+public:
+    int a1 = 0;
+};
 
 int main(int argc, char* argv[])
 {
@@ -83,6 +137,24 @@ int main(int argc, char* argv[])
         std::cout << "&a.b22 = \t" << reinterpret_cast<long long>(&a.b22) << std::endl;
         std::cout << "&a.a1 = \t" << reinterpret_cast<long long>(&a.a1) << std::endl;
     }
+    std::cout << "=============================================" << std::endl;
+    /// 多继承二义性问题 (钻石继承 / 菱形继承)
+    {
+        A3 a;
+        // a.C::c1 = 1; /// c1不明确
+        a.B1::c1 = 1;
+        // std::cout << "&a.C::c1 = " << reinterpret_cast<long long>(&a.C::c1) << std::endl; /// c1不明确
+        std::cout << "&a.B1::c1 = " << reinterpret_cast<long long>(&a.B1::c1) << std::endl;
+        std::cout << "&a.B2::c1 = " << reinterpret_cast<long long>(&a.B2::c1) << std::endl;
+        std::cout << "-----------------------------------------" << std::endl;
+
+        /// 虚继承 专门解决二义性问题
+        A4 a4;
+        std::cout << "&a4.C::c1 = " << reinterpret_cast<long long>(&a4.C::c1) << std::endl;
+        std::cout << "&a4.B3::c1 = " << reinterpret_cast<long long>(&a4.B3::c1) << std::endl;
+        std::cout << "&a4.B4::c1 = " << reinterpret_cast<long long>(&a4.B4::c1) << std::endl;
+    }
+
     getchar();
     return 0;
 }
