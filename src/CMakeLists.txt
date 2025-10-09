@@ -34,6 +34,8 @@ message("OpenCV_FOUND = ${OpenCV_FOUND}")
 message("OpenCV_VERSION = ${OpenCV_VERSION}")
 message("OpenCV_LIBS = ${OpenCV_LIBS}")
 
+set(TARGET_PLATFORM)
+
 
 # 外部依赖项
 set(DPS_INCLUDES)
@@ -72,6 +74,7 @@ add_subdirectory(memory_vector)
 add_subdirectory(memory_new_delete)
 add_subdirectory(memory_allocate)
 add_subdirectory(memory_uninitialized_copy)
+add_subdirectory(memory_limit_construction)
 
 
 
