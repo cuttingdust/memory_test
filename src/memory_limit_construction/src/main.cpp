@@ -37,6 +37,8 @@ int main(int argc, char* argv[])
         // TestMem tm1;
         // auto tm2 = new TestMem;
         TestMem* tm3 = TestMem::Create();
+        // delete tm3;
+        TestMem::Drop(tm3);
     }
     getchar();
     return 0;
