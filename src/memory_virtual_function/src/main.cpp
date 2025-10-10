@@ -23,7 +23,7 @@ public:
     }
     void Test2() override
     {
-        std::cout << "A test1" << std::endl;
+        std::cout << "A test2" << std::endl;
     }
 };
 
@@ -35,7 +35,7 @@ class C : public B
     }
     void Test2() override
     {
-        std::cout << "C test1" << std::endl;
+        std::cout << "C test2" << std::endl;
     }
 };
 
@@ -43,6 +43,7 @@ void TestClass(B *b)
 {
     std::cout << "in TestClass" << std::endl;
     b->Test1();
+    b->Test2();
 }
 
 int main(int argc, char *argv[])
@@ -52,9 +53,11 @@ int main(int argc, char *argv[])
     {
         B b;
         b.Test1();
+        b.Test2();
 
         A a;
         a.Test1();
+        a.Test2();
 
         TestClass(&a);
 
