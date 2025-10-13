@@ -77,6 +77,7 @@ add_subdirectory(memory_uninitialized_copy)
 add_subdirectory(memory_limit_construction)
 add_subdirectory(memory_virtual_class)
 add_subdirectory(memory_virtual_function)
+add_subdirectory(memory_pool_one)
 
 
 
