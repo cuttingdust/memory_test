@@ -1,6 +1,6 @@
-/**
- * @file   xsec.h
- * @brief  desµÄ¼ÓÃÜ½âÃÜ
+ï»¿/**
+ * @file   XSec.h
+ * @brief  desçš„åŠ å¯†è§£å¯†
  *
  * @details   
  *
@@ -37,19 +37,19 @@ public:
     };
 
 public:
-    /// \brief ³õÊ¼»¯¼ÓÃÜ¶ÔÏó£¬ÇåÀíÖ®Ç°µÄÊı¾İ
-    /// \param type ¼ÓÃÜÀàĞÍ
-    /// \param pass ÃØÔ¿£¬¿ÉÒÔÊÇ¶ş½øÖÆ
-    /// \param is_en ¼ÓÃÜ false½âÃÜ
-    /// \return ÊÇ·ñ³É¹¦
+    /// \brief åˆå§‹åŒ–åŠ å¯†å¯¹è±¡ï¼Œæ¸…ç†ä¹‹å‰çš„æ•°æ®
+    /// \param type åŠ å¯†ç±»å‹
+    /// \param pass ç§˜é’¥ï¼Œå¯ä»¥æ˜¯äºŒè¿›åˆ¶
+    /// \param is_en åŠ å¯† falseè§£å¯†
+    /// \return æ˜¯å¦æˆåŠŸ
     virtual auto init(const XSecType &type, const std::string &pass, bool is_en) -> bool;
 
-    /// \brief ¼Ó½âÃÜÊı¾İ
-    /// \param in ÊäÈëÊı¾İ
-    /// \param in_size Êı¾İ´óĞ¡
-    /// \param out Êä³öÊı¾İ
-    /// \param is_end ÊÇ·ñ½áÊø
-    /// \return ³É¹¦·µ»Ø¼Ó½âÃÜºóÊı¾İ×Ö½Ú´óĞ¡£¬Ê§°Ü·µ»Ø0
+    /// \brief åŠ è§£å¯†æ•°æ®
+    /// \param in è¾“å…¥æ•°æ®
+    /// \param in_size æ•°æ®å¤§å°
+    /// \param out è¾“å‡ºæ•°æ®
+    /// \param is_end æ˜¯å¦ç»“æŸ
+    /// \return æˆåŠŸè¿”å›åŠ è§£å¯†åæ•°æ®å­—èŠ‚å¤§å°ï¼Œå¤±è´¥è¿”å›0
     virtual auto encrypt(const unsigned char *in, int in_size, unsigned char *out, bool is_end = true) -> int;
 
     /// \brief

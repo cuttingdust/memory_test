@@ -1,4 +1,4 @@
-#include "xsec.h"
+#include "XSec.h"
 
 #include <openssl/des.h>
 #include <openssl/evp.h>
