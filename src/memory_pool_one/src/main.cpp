@@ -22,20 +22,20 @@
 
 */
 
-
+/// C++17 memory_resource内存池
 int main(int argc, char *argv[])
 {
     std::cout << "cppds.com" << std::endl;
     {
         std::pmr::pool_options opt;
-        opt.largest_required_pool_block = 1024 * 1024 * 10;  /// 大数据块的字节数
-        opt.max_blocks_per_chunk        = 1024 * 1024 * 100; /// 普通数据，每块数据块的大小
+        opt.largest_required_pool_block = 1024 * 1024 * 10;  /// 大数据块的字节数 10MB
+        opt.max_blocks_per_chunk        = 1024 * 1024 * 100; /// 普通数据，每块数据块的大小 100MB
 
         /// 线程安全的内存池
         std::pmr::synchronized_pool_resource mpool(opt);
-        int                                  size = 1024 * 1024;
+        int                                  size = 1024 * 1024; /// 1M
         std::vector<void *>                  datas;
-        for (int i = 0; i < 2000; i++)
+        for (int i = 0; i < 500; i++) /// 500M
         {
             try
             {
@@ -51,6 +51,19 @@ int main(int argc, char *argv[])
                 exit(0);
             }
         }
+
+        auto b1 = mpool.allocate(1024 * 1024 * 20); /// 申请大块空间
+        std::this_thread::sleep_for(std::chrono::microseconds(2000));
+        mpool.deallocate(b1, 1024 * 1024 * 20);
+
+        for (auto d : datas)
+        {
+            mpool.deallocate(d, size);
+            std::cout << "-" << std::flush;
+            std::this_thread::sleep_for(std::chrono::microseconds(20));
+        }
+
+        mpool.release(); /// 是否线程池的所有内存
     }
     getchar();
     return 0;
