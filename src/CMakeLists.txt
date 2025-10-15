@@ -34,8 +34,13 @@ message("OpenCV_FOUND = ${OpenCV_FOUND}")
 message("OpenCV_VERSION = ${OpenCV_VERSION}")
 message("OpenCV_LIBS = ${OpenCV_LIBS}")
 
-set(TARGET_PLATFORM)
+# OpenSSL
+find_package(OpenSSL REQUIRED)
+message("OpenSSL_FOUND = ${OpenSSL_FOUND}")
+message("OpenSSL_VERSION = ${OpenSSL_VERSION}")
+message("OpenSSL_LIBS = ${OpenSSL_LIBS}")
 
+############################################################################################
 
 # 外部依赖项
 set(DPS_INCLUDES)
@@ -78,6 +83,7 @@ add_subdirectory(memory_limit_construction)
 add_subdirectory(memory_virtual_class)
 add_subdirectory(memory_virtual_function)
 add_subdirectory(memory_pool_one)
+add_subdirectory(memory_XFile_SSL)
 
 
 
