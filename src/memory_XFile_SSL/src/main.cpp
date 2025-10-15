@@ -14,7 +14,13 @@ int main(int argc, char *argv[])
         std::cout << "en_size = " << en_size << std::endl;
         std::cout << out << std::endl;
 
-        return 0;
+        std::cout << "=============================================" << std::endl;
+
+        crypt.init(XSec::XDES_ECB, "12345678", false);
+        unsigned char de_out[1024] = { 0 };
+        int           de_size      = crypt.encrypt(out, en_size, de_out, true);
+        std::cout << "de_size = " << de_size << std::endl;
+        std::cout << de_out << std::endl;
     }
     getchar();
     return 0;
