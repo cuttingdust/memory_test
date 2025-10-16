@@ -11,6 +11,8 @@
 #ifndef XSEC_H
 #define XSEC_H
 
+#include "XData.h"
+
 #include <memory>
 #include <string>
 
@@ -36,6 +38,12 @@ public:
         XSM4_CBC
     };
 
+    using Ptr = std::shared_ptr<XSec>;
+    static auto create() -> XSec::Ptr
+    {
+        return std::make_shared<XSec>();
+    }
+
 public:
     /// \brief 初始化加密对象，清理之前的数据
     /// \param type 加密类型
@@ -54,6 +62,12 @@ public:
 
     /// \brief
     virtual auto close() -> void;
+
+public:
+    /// \brief 获取要填充的字节大小
+    /// \param datasize 输入要加密的大小
+    /// \return
+    auto getPadding(int datasize) -> int;
 
 private:
     class PImpl;

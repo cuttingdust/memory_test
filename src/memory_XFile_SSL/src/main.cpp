@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
         rt->setMemPool(creator);
 
         const auto ct = XCryptTask::create();
+        ct->init("12345678");
+        ct->setMemPool(creator);
         rt->setNext(ct);
 
         rt->start();

@@ -311,3 +311,15 @@ auto XSec::close() -> void
         impl_->ctx_ = nullptr;
     }
 }
+
+auto XSec::getPadding(int datasize) -> int
+{
+    const int block_size = sizeof(const_DES_cblock);
+    int       padding    = block_size - datasize % block_size;
+    if (padding == 0)
+    {
+        padding = block_size;
+    }
+
+    return padding;
+}

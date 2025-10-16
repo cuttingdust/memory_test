@@ -91,14 +91,18 @@ auto XReadTask::run() -> void
             break;
         }
         data->setSize(impl_->ifs_.gcount());
-        std::cout << "["<<impl_->ifs_.gcount()<<"]" << std::flush;
+        if (impl_->ifs_.eof())
+        {
+            data->setEnd(true);
+        }
+        std::cout << "[" << impl_->ifs_.gcount() << "]" << std::flush;
 
         if (next())
         {
             next()->pushBack(data);
         }
     }
-    std::cout <<  std::endl;
+    std::cout << std::endl;
     std::cout << "end thread XReadTask::Main" << std::endl;
     std::cout << "============================" << std::endl;
 }

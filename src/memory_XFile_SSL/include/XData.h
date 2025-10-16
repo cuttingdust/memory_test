@@ -38,9 +38,16 @@ public:
     /// \return
     auto allocate(const long long mem_size) -> void *;
 
+    auto data() const -> void *;
+
     auto setSize(const long long s) -> void;
 
     auto size() const -> long long;
+
+    auto setEnd(bool is_end) -> void;
+
+    auto isEnd() const -> bool;
+
 
 private:
     class PImpl;

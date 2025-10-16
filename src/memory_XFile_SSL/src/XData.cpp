@@ -15,6 +15,7 @@ public:
     long long    mem_size_ = 0; ///< 占用空间字节数
     long long    size_     = 0; ///< 数据字节数
     void        *data_     = nullptr;
+    bool         end_      = false;
 };
 
 XData::PImpl::PImpl(XData *owenr) : owenr_(owenr)
@@ -80,7 +81,22 @@ auto XData::setSize(const long long s) -> void
     impl_->size_ = s;
 }
 
+auto XData::data() const -> void *
+{
+    return impl_->data_;
+}
+
 auto XData::size() const -> long long
 {
     return impl_->size_;
+}
+
+auto XData::setEnd(bool is_end) -> void
+{
+    impl_->end_ = is_end;
+}
+
+auto XData::isEnd() const -> bool
+{
+    return impl_->end_;
 }
