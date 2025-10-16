@@ -18,25 +18,29 @@ namespace std::pmr
     class memory_resource;
 }
 
+using SmartMemPool = std::shared_ptr<std::pmr::memory_resource>;
 
 class XData
 {
 public:
-    using Ptr          = std::shared_ptr<XData>;
-    using SmartMemPool = std::shared_ptr<std::pmr::memory_resource>;
+    virtual ~XData();
+    using Ptr = std::shared_ptr<XData>;
+    static auto make(const SmartMemPool &pool) -> XData::Ptr;
+
+protected:
+    XData();
+    XData(const SmartMemPool &pool);
+
 
 public:
-    static auto create(const SmartMemPool &pool) -> XData::Ptr;
-
     /// \brief
     /// \param mem_size  占用内存字节数
     /// \return
-    auto allocate(long long mem_size) -> void *;
+    auto allocate(const long long mem_size) -> void *;
 
-private:
-    XData();
-    XData(const SmartMemPool &pool);
-    virtual ~XData();
+    auto setSize(const long long s) -> void;
+
+    auto size() const -> long long;
 
 private:
     class PImpl;

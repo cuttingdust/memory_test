@@ -1,36 +1,29 @@
 ﻿#include "XReadTask.h"
-#include "XSec.h"
+#include "XCryptTask.h"
 
 #include <iostream>
+#include <memory_resource>
 
 
 int main(int argc, char *argv[])
 {
-    // {
-    //     std::cout << "目录下文件批量加密" << std::endl;
-    //     XSec crypt;
-    //     crypt.init(XSec::XDES_ECB, "12345678", true);
-    //     unsigned char out[1024] = { 0 };
-    //     int           en_size   = crypt.encrypt((unsigned char *)"abcdefg", 7, out, true);
-    //     std::cout << "en_size = " << en_size << std::endl;
-    //     std::cout << out << std::endl;
-    //
-    //     std::cout << "=============================================" << std::endl;
-    //
-    //     crypt.init(XSec::XDES_ECB, "12345678", false);
-    //     unsigned char de_out[1024] = { 0 };
-    //     int           de_size      = crypt.encrypt(out, en_size, de_out, true);
-    //     std::cout << "de_size = " << de_size << std::endl;
-    //     std::cout << de_out << std::endl;
-    // }
-
     {
-        XReadTask rt;
-        if (rt.init("assert/lena_hed.jpg"))
-        {
-            rt.start();
-            rt.wait();
-        }
+        std::cout << "目录下文件批量加密" << std::endl;
+        /// 创建一个内存池
+        std::shared_ptr<std::pmr::memory_resource> creator = std::make_shared<std::pmr::synchronized_pool_resource>();
+
+        const auto rt = XReadTask::create();
+        rt->init("assert/lena_hed.jpg");
+        rt->setMemPool(creator);
+
+        const auto ct = XCryptTask::create();
+        rt->setNext(ct);
+
+        rt->start();
+        ct->start();
+
+        rt->wait();
+        ct->wait();
     }
     getchar();
     return 0;

@@ -32,6 +32,11 @@ XReadTask::~XReadTask()
     }
 }
 
+auto XReadTask::create() -> XReadTask::Ptr
+{
+    return std::make_shared<XReadTask>();
+}
+
 auto XReadTask::init(const std::string &filename) -> bool
 {
     if (filename.empty())
@@ -62,6 +67,7 @@ auto XReadTask::init(const std::string &filename) -> bool
 
 auto XReadTask::run() -> void
 {
+    std::cout << "============================" << std::endl;
     std::cout << "begin thread XReadTask::Main" << std::endl;
     while (isRunning())
     {
@@ -70,9 +76,29 @@ auto XReadTask::run() -> void
             break;
         }
 
-        char buf[10240] = { 0 };
-        impl_->ifs_.read(buf, sizeof(buf));
-        std::cout << "[" << impl_->ifs_.gcount() << "]" << std::flush;
+        // char buf[10240] = { 0 };
+
+        /// 创建内存池空间管理对象
+        auto data      = XData::make(memPool());
+        int  data_size = 1024;
+
+        /// 申请空间
+        void *buf = data->allocate(data_size);
+
+        impl_->ifs_.read(static_cast<char *>(buf), data_size);
+        if (impl_->ifs_.gcount() <= 0)
+        {
+            break;
+        }
+        data->setSize(impl_->ifs_.gcount());
+        std::cout << "["<<impl_->ifs_.gcount()<<"]" << std::flush;
+
+        if (next())
+        {
+            next()->pushBack(data);
+        }
     }
+    std::cout <<  std::endl;
     std::cout << "end thread XReadTask::Main" << std::endl;
+    std::cout << "============================" << std::endl;
 }

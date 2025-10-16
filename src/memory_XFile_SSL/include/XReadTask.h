@@ -20,6 +20,8 @@ class XReadTask : public XIOStream
 public:
     XReadTask();
     ~XReadTask() override;
+    using Ptr = std::shared_ptr<XReadTask>;
+    static auto create() -> XReadTask::Ptr;
 
 public:
     auto init(const std::string& filename) -> bool;

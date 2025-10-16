@@ -46,14 +46,16 @@ XData::~XData()
     impl_->data_     = nullptr;
     impl_->mem_size_ = 0;
     impl_->size_     = 0;
+
+    std::cout << "-" << std::flush;
 }
 
-auto XData::create(const SmartMemPool &pool) -> XData::Ptr
+auto XData::make(const SmartMemPool &pool) -> XData::Ptr
 {
-    return std::make_shared<XData>(pool);
+    return std::shared_ptr<XData>(new XData(pool));
 }
 
-auto XData::allocate(long long mem_size) -> void *
+auto XData::allocate(const long long mem_size) -> void *
 {
     if (mem_size <= 0)
     {
@@ -69,5 +71,16 @@ auto XData::allocate(long long mem_size) -> void *
     impl_->data_     = impl_->mem_pool_->allocate(mem_size);
     impl_->mem_size_ = mem_size;
     impl_->size_     = mem_size;
+    std::cout << "+" << std::flush;
     return impl_->data_;
+}
+
+auto XData::setSize(const long long s) -> void
+{
+    impl_->size_ = s;
+}
+
+auto XData::size() const -> long long
+{
+    return impl_->size_;
 }
