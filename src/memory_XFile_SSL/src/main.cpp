@@ -1,5 +1,6 @@
 ﻿#include "XReadTask.h"
 #include "XCryptTask.h"
+#include "XWriteTask.h"
 
 #include <iostream>
 #include <memory_resource>
@@ -21,12 +22,21 @@ int main(int argc, char *argv[])
         ct->setMemPool(creator);
         rt->setNext(ct);
 
+        const auto wt = XWriteTask::create();
+        wt->init("assert/lena_hed_out.jpg");
+        wt->setMemPool(creator);
+        ct->setNext(wt);
+
         rt->start();
         ct->start();
+        wt->start();
 
         rt->wait();
         ct->wait();
+        wt->wait();
     }
+
+
     getchar();
     return 0;
 }

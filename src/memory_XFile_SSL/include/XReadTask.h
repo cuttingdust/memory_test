@@ -24,7 +24,7 @@ public:
     static auto create() -> XReadTask::Ptr;
 
 public:
-    auto init(const std::string& filename) -> bool;
+    auto init(const std::string& filepath) -> bool;
 
 private:
     auto run() -> void override;

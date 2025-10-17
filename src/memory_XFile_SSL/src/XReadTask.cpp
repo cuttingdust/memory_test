@@ -37,27 +37,27 @@ auto XReadTask::create() -> XReadTask::Ptr
     return std::make_shared<XReadTask>();
 }
 
-auto XReadTask::init(const std::string &filename) -> bool
+auto XReadTask::init(const std::string &filepath) -> bool
 {
-    if (filename.empty())
+    if (filepath.empty())
     {
         return false;
     }
 
     /// 检查文件是否存在
-    if (!std::filesystem::exists(filename))
+    if (!std::filesystem::exists(filepath))
     {
-        std::cerr << "File does not exist: " << filename << std::endl;
+        std::cerr << "File does not exist: " << filepath << std::endl;
         return false;
     }
 
-    impl_->ifs_.open(filename, std::ios::in | std::ios::binary); /// 二进制打开
+    impl_->ifs_.open(filepath, std::ios::in | std::ios::binary); /// 二进制打开
     if (!impl_->ifs_)
     {
-        std::cerr << "open file " << filename << " failed!" << std::endl;
+        std::cerr << "open file " << filepath << " failed!" << std::endl;
         return false;
     }
-    std::cout << filename << " open success!" << std::endl;
+    std::cout << filepath << " open success!" << std::endl;
     impl_->ifs_.seekg(0, std::ios::end);
     this->setDataByte(impl_->ifs_.tellg());
     impl_->ifs_.seekg(0, std::ios::beg);
