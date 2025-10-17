@@ -60,6 +60,10 @@ auto XCryptTask::run() -> void
         out->setSize(data_size);
         out->setEnd(data->isEnd());
 
+        std::cout << "<" << data_size << ">" << std::flush;
+
+        // std::this_thread::sleep_for(std::chrono::microseconds(10));
+
         if (next())
         {
             next()->pushBack(out);
@@ -68,8 +72,6 @@ auto XCryptTask::run() -> void
         {
             break;
         }
-
-        std::cout << "<" << data->size() << ">" << std::flush;
     }
     std::cout << std::endl;
     std::cout << "end XCryptTask::Main()" << std::endl;

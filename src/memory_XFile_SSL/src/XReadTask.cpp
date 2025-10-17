@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <thread>
 
 class XReadTask::PImpl
 {
@@ -97,6 +98,7 @@ auto XReadTask::run() -> void
         }
         std::cout << "[" << impl_->ifs_.gcount() << "]" << std::flush;
 
+        // std::this_thread::sleep_for(std::chrono::microseconds(10));
         if (next())
         {
             next()->pushBack(data);

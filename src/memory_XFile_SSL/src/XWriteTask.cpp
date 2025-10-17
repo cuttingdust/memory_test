@@ -62,6 +62,8 @@ auto XWriteTask::run() -> void
             continue;
         }
         impl_->ofs_.write(static_cast<char *>(data->data()), data->size());
+
+        std::cout << "{" << data->size() << "}" << std::flush;
         if (data->isEnd())
         {
             break;
