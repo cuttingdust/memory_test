@@ -64,10 +64,17 @@ set(Protobuf_MOUDLES
 	protobuf::libprotobuf-lite
 )
 
-#spdlog
+# argparse
+set(Argparse_MOUDLES
+	argparse::argparse
+)
+
+# spdlog
 set(LOG_MOUDLES
 	spdlog::spdlog_header_only
 )
+
+
 
 # 获取当前目录下源码和头文件
 macro(get_src_include)

@@ -5,6 +5,7 @@ project(${CURRENT_DIR})
 
 set(DPS_LIBRARYS 
     ${SSL_MOUDLES}
+	${Argparse_MOUDLES}
 )
 
 cpp_execute(${PROJECT_NAME})

@@ -1,8 +1,11 @@
 ﻿#include "XWriteTask.h"
 
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <thread>
+
+namespace fs = std::filesystem;
 
 class XWriteTask::PImpl
 {
@@ -37,7 +40,10 @@ auto XWriteTask::init(const std::string &filepath) -> bool
     {
         return false;
     }
+    auto dir_path = fs::path(filepath).parent_path();
 
+    if (!fs::exists(dir_path))
+        fs::create_directories(dir_path);
 
     impl_->ofs_.open(filepath, std::ios::out | std::ios::binary); /// 二进制打开
     if (!impl_->ofs_)

@@ -87,18 +87,16 @@ auto XReadTask::run() -> void
         void *buf = data->allocate(data_size);
 
         impl_->ifs_.read(static_cast<char *>(buf), data_size);
-        if (impl_->ifs_.gcount() <= 0)
-        {
-            break;
-        }
-        data->setSize(impl_->ifs_.gcount());
         if (impl_->ifs_.eof())
         {
             data->setEnd(true);
         }
+        data->setSize(impl_->ifs_.gcount());
+
         std::cout << "[" << impl_->ifs_.gcount() << "]" << std::flush;
 
         // std::this_thread::sleep_for(std::chrono::microseconds(10));
+
         if (next())
         {
             next()->pushBack(data);

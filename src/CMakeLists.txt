@@ -40,6 +40,12 @@ message("OpenSSL_FOUND = ${OpenSSL_FOUND}")
 message("OpenSSL_VERSION = ${OpenSSL_VERSION}")
 message("OpenSSL_LIBS = ${OpenSSL_LIBS}")
 
+# argparse 
+find_package(argparse CONFIG REQUIRED)
+message("argparse_FOUND = ${argparse_FOUND}")
+message("argparse_VERSION = ${argparse_VERSION}")
+message("argparse_LIBS = ${argparse_LIBS}")
+
 ############################################################################################
 
 # 外部依赖项

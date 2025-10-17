@@ -11,8 +11,6 @@
 #ifndef XSEC_H
 #define XSEC_H
 
-#include "XData.h"
-
 #include <memory>
 #include <string>
 
